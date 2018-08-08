@@ -6,12 +6,12 @@ la = love.audio
 le = love.event
 
 -- general libraries
-vec = require 'libs/vector'
 colors = require 'libs/colors'
 
 -- collision
 bump = require 'libs/bump'
 world = bump.newWorld()
+sti = require 'libs/sti'
 
 -- resolution
 push = require 'libs/push'

@@ -28,6 +28,14 @@ function Player:move(dx, dy)
                                             self.y + dy * self.spd, self.filter)
 end
 
+function Player:launchAll()
+
+end
+
+function Player:action()
+
+end
+
 function Player:draw()
     lg.setColor(self.color[1], self.color[2], self.color[3], 0.5)
     lg.circle('fill', self.x + self.w / 2, self.y + self.h / 2, telekinesisRadius)

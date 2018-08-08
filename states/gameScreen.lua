@@ -1,11 +1,13 @@
 local gameScreen = {}
 
 -- game vars
+local arena = nil
+
 local p1 = Player(world, 300, 300, assets.sprites.pl, colors.aqua)
 local p2 = Player(world, 500, 300, assets.sprites.pl, colors.orange)
 
 function gameScreen:enter()
-    world:add({},0,0,10,10)
+    --sti.new('assets/maps/map1.lua', { 'bump' })
 end
 
 function gameScreen:update(dt)
