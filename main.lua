@@ -6,6 +6,7 @@ la = love.audio
 le = love.event
 
 -- general libraries
+vec = require 'libs/vector'
 colors = require 'libs/colors'
 
 -- collision
@@ -37,7 +38,7 @@ gameScreen = require 'states.gameScreen'
 telekinesisRadius = 100
 
 function love.load()
-    lw.setTitle('Telekinese')
+    lw.setTitle('Telekinessball')
     
     lg.setFont(assets.fonts.courier_prime(48))
     
@@ -50,5 +51,7 @@ function love.keypressed(k)
         push:switchFullscreen()
     elseif (k == 'q' or k == 'escape') then
         le.quit()
+    elseif (k == 'm') then
+    
     end
 end
