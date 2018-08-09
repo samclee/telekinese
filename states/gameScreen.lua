@@ -10,7 +10,6 @@ local ball1 = Ball(world, 400, 200, assets.sprites.baseball)
 
 function gameScreen:enter()
     --sti.new('assets/maps/map1.lua', { 'bump' })
-    lg.setBackgroundColor(1, 1, 1)
 end
 
 function gameScreen:update(dt)
@@ -35,15 +34,13 @@ end
 
 function gameScreen:draw()
     push:start()
-    
+    lg.rectangle('fill', 0, 0, gameW, gameH)
     p1:draw()
     p2:draw()
 
     
     -- draw balls
     ball1:draw()
-    
-    lg.print('Game Screen', 0, 0)
     
     push:finish()
 end

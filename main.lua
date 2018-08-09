@@ -37,10 +37,11 @@ gameScreen = require 'states.gameScreen'
 
 -- game vars
 telekinesisRadius = 100
+debug = true
 
 function love.load()
     lw.setTitle('Telekinessball')
-    
+
     lg.setFont(assets.fonts.courier_prime(48))
     
     gamestate.registerEvents()
