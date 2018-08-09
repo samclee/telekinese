@@ -17,10 +17,10 @@ function Ball:init(world, x, y, sprite)
 end
 
 function Ball:update()
-    if (self.status == 0) then
-        local actualX, actualY, cols, len = world:move(self, self.pos.x + self.velVec.x, 
+    local actualX, actualY, cols, len = world:move(self, self.pos.x + self.velVec.x, 
                                                         self.pos.y + self.velVec.y)
-        -- reduce velVec
+    if (self.status == 0) then
+        -- decelerate
         if self.velVec:len() ~= 0 then
             self.velVec = self.velVec * 0.9
         end
@@ -37,12 +37,10 @@ function Ball:update()
             if otherObj.id == 'wall' then
                 -- bounce
             end
-
         end
+    end -- if ball is active
 
-        self.pos.x, self.pos.y = actualX, actualY
-    end
-
+    self.pos.x, self.pos.y = actualX, actualY
 end
 
 function Ball:draw()

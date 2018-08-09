@@ -2,11 +2,10 @@ local gameScreen = {}
 
 -- game vars
 local arena = nil
-local balls = {}
+local balls = {Ball(world, 400, 200, assets.sprites.baseball)}
 
 local p1 = Player(world, 300, 300, assets.sprites.pl, colors.aqua)
 local p2 = Player(world, 500, 300, assets.sprites.pl, colors.orange)
-local ball1 = Ball(world, 400, 200, assets.sprites.baseball)
 
 function gameScreen:enter()
     --sti.new('assets/maps/map1.lua', { 'bump' })
@@ -29,7 +28,9 @@ function gameScreen:update(dt)
     -- p2 input
     
     -- update balls
-    ball1:update()
+    for i,ball in ipairs(balls) do
+        ball:update()
+    end
 end
 
 function gameScreen:draw()
@@ -40,7 +41,9 @@ function gameScreen:draw()
 
     
     -- draw balls
-    ball1:draw()
+    for i,ball in ipairs(balls) do
+        ball:draw()
+    end
     
     push:finish()
 end
