@@ -20,10 +20,7 @@ function gameScreen:update(dt)
     if (lk.isDown('a')) then dx = dx - 1 end
     if (lk.isDown('d')) then dx = dx + 1 end
     
-    if (dx ~= 0 or dy ~= 0) then
-        local rss = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2))
-        p1:update(dt, dx / rss, dy / rss)
-    end
+    p1:update(dt, dx, dy)
     
     -- p2 input
     

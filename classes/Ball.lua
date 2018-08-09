@@ -11,7 +11,6 @@ function Ball:init(world, x, y, sprite)
 
     -- collision
    self.world:add(self, self:getRect())
-   self.debugColor = colors.green
 
    self.filter = nil  
 end
@@ -47,7 +46,11 @@ function Ball:draw()
     lg.draw(self.sprite, self.pos.x, self.pos.y)
 
     if debug then
-        lg.setColor(self.debugColor[1], self.debugColor[2], self.debugColor[3], 0.8)
+        if self.status == 0 then
+            lg.setColor(colors.green[1], colors.green[2], colors.green[3], 0.8)
+        elseif self.status == 1 then
+            lg.setColor(colors.blue[1], colors.blue[2], colors.blue[3], 0.8)
+        end
         lg.rectangle('fill', self.pos.x, self.pos.y, self.w, self.h)
     end
 end

@@ -24,6 +24,11 @@ function Player:init(world, x, y, sprite, color)
 end
 
 function Player:update(dt, dx, dy)
+    if dx ~= 0 or dy ~= 0 then
+        local rss = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2))
+        dx, dy = dx / rss, dy  / rss
+    end
+
     local actualX, actualY, cols, len = self.world:move(self, self.pos.x + dx * self.spd, 
                                             self.pos.y + dy * self.spd, self.filter)
 
@@ -39,7 +44,7 @@ function Player:update(dt, dx, dy)
     
     -- if isGrabbing, attempt to move all grabbed balls with you
     for i,ball in ipairs(self.grabbedBalls) do
-
+        ball.velVec = vec(dx * self.spd, dy * self.spd)
     end
     
     self.pos.x, self.pos.y = actualX, actualY
@@ -52,7 +57,9 @@ end
 function Player:grabBalls(balls)
     for i,ball in ipairs(balls) do
         if (ball.pos - self.pos):len() < telekinesisRadius then
-
+            ball.velVec.x, ball.velVec.y = 0, 0
+            ball.status = 1
+            table.insert(self.grabbedBalls, ball)
         end
     end
 end
@@ -61,7 +68,7 @@ function Player:action(balls)
     if (#self.grabbedBalls > 0) then
         self:launchAll()
     else
-        -- check thru all balls and see if they're in range. If so, set their vel vec to 0 and push them all into grabbedBalls
+        self:grabBalls(balls)
     end
 end
 
