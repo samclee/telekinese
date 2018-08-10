@@ -17,6 +17,7 @@ local p2 = Player(500, 300, spritesheet, plAnims, colors.orange)
 
 function gameScreen:enter()
     --sti.new('assets/maps/map1.lua', { 'bump' })
+    screen:setShake(10)
 end
 
 function gameScreen:update(dt)
