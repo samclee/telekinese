@@ -18,10 +18,10 @@ end
 function Ball:update()
     local actualX, actualY, cols, len = world:move(self, self.pos.x + self.velVec.x, 
                                                         self.pos.y + self.velVec.y)
-    if (self.status == 0) then
+    if self.status == 0 then
         -- decelerate
         if self.velVec:len() ~= 0 then
-            self.velVec = self.velVec * 0.9
+            self.velVec = self.velVec * 0.95
         end
 
         -- if magnitude is < some val, set it to 0,0
