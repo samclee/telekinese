@@ -1,19 +1,21 @@
 local Player = Class{ __includes = Entity }
 
-function Player:init(world, x, y, sprite, color)
+function Player:init(x, y, sheet, anims, color)
     -- visual
     self.id = 'player'
-    self.sprite = sprite
+    self.sheet = sheet
+    self.anims = anims
+    self.curAnim = anims[1]
     self.color = color
     
     -- technical
-    self.spd = 7
+    self.spd = 3
     self.grabbedBalls = {}
     
-    Entity.init(self, world, x, y, sprite:getWidth(), sprite:getHeight())
+    Entity.init(self, x, y, 32, 32)
     
     -- collision
-    self.world:add(self, self:getRect()) 
+    world:add(self, self:getRect()) 
     self.filter = function(item, other)
         if (other.id == 'player') then
             return 'cross'
@@ -24,12 +26,17 @@ function Player:init(world, x, y, sprite, color)
 end
 
 function Player:update(dt, dx, dy)
+    -- non-zero movement
     if dx ~= 0 or dy ~= 0 then
         local rss = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2))
         dx, dy = dx / rss, dy  / rss
+        
+        self.curAnim = self.anims[2]
+    else
+        self.curAnim = self.anims[1]
     end
 
-    local actualX, actualY, cols, len = self.world:move(self, self.pos.x + dx * self.spd, 
+    local actualX, actualY, cols, len = world:move(self, self.pos.x + dx * self.spd, 
                                             self.pos.y + dy * self.spd, self.filter)
 
     -- collisions
@@ -44,21 +51,23 @@ function Player:update(dt, dx, dy)
     
     -- if isGrabbing, attempt to move all grabbed balls with you
     for i,ball in ipairs(self.grabbedBalls) do
-        if (self.pos - ball.pos):len() < telekinesisRadius then
+        if (self:getCenter() - ball:getCenter()):len() < telekinesisRadius then
             ball.velVec = vec(dx * self.spd, dy * self.spd)
         else
-            ball.velVec = (self.pos - ball.pos):normalized() * 12
+            ball.velVec = (self:getCenter() - ball:getCenter()):normalized() * 12
         end
-
     end
     
     self.pos.x, self.pos.y = actualX, actualY
+    
+    -- animation
+    self.curAnim:update(dt)
 end
 
 function Player:launchAll()
     for i = #self.grabbedBalls, 1, -1 do
         local ball = self.grabbedBalls[i]
-        ball.velVec = (ball.pos - self.pos):normalized() * launchStr
+        ball.velVec = (ball:getCenter() - self:getCenter()):normalized() * launchStr
         ball.status = 0
         table.remove(self.grabbedBalls, i)
     end
@@ -66,7 +75,7 @@ end
 
 function Player:grabBalls(balls)
     for i,ball in ipairs(balls) do
-        if ball.status == 0 and (ball.pos - self.pos):len() < telekinesisRadius then
+        if ball.status == 0 and (ball:getCenter() - self:getCenter()):len() < telekinesisRadius then
             ball.velVec.x, ball.velVec.y = 0, 0
             ball.status = 1
             table.insert(self.grabbedBalls, ball)
@@ -89,7 +98,8 @@ function Player:draw()
     
     -- character sprite
     lg.setColor(self.color)
-    lg.draw(self.sprite, self.pos.x, self.pos.y)
+    --lg.draw(self.sprite, self.pos.x, self.pos.y)
+    self.curAnim:draw(self.sheet, self.pos.x, self.pos.y)
 
     -- debug
     if debug then
