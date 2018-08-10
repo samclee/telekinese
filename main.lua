@@ -9,13 +9,14 @@ le = love.event
 vec = require 'libs/vector'
 colors = require 'libs/colors'
 
--- visual
-anim8 = require 'libs/anim8'
-
 -- collision
 bump = require 'libs/bump'
 world = bump.newWorld()
 sti = require 'libs/sti'
+moonshine = require 'libs/moonshine'
+effect = moonshine(moonshine.effects.crt)
+            .chain(moonshine.effects.scanlines)
+effect.scanlines.opacity = 0.2
 
 -- resolution
 push = require 'libs/push'
@@ -26,6 +27,11 @@ lg.setDefaultFilter('nearest', 'nearest')
 
 -- assets
 assets = require('libs/cargo').init('assets')
+
+-- visual
+anim8 = require 'libs/anim8'
+screen = require 'libs/shack'
+screen:setDimensions(push:getDimensions())
 
 -- classes
 Class = require 'libs/class'
