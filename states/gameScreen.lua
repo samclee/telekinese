@@ -42,6 +42,10 @@ function gameScreen:reset()
     exp3:play()
     scores[1], scores[2] = 0, 0
     gameEnd = false
+    
+    for i,ball in ipairs(balls) do
+        ball.velVec.x, ball.velVec.y = 0, 0
+    end
 end
 
 function gameScreen:enter()
@@ -131,6 +135,8 @@ end
 function gameScreen:keypressed(k)
     if k == 'r' then
         self:reset()
+    elseif k == 'e' then
+        gamestate.switch(startScreen)
     end
     
     if k == 'space' then
