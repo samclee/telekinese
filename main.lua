@@ -12,7 +12,6 @@ colors = require 'libs/colors'
 -- collision
 bump = require 'libs/bump'
 world = bump.newWorld()
-sti = require 'libs/sti'
 moonshine = require 'libs/moonshine'
 effect = moonshine(moonshine.effects.crt)
             .chain(moonshine.effects.scanlines)
@@ -34,6 +33,18 @@ screen = require 'libs/shack'
 screen:setDimensions(push:getDimensions())
 
 -- audio
+require 'libs/slam'
+bgm = la.newSource('assets/audio/SwingJeDing.mp3', 'stream')
+bgm:setLooping(true)
+bgm:setVolume(0.3)
+bgm:play()
+
+exp3 = la.newSource('assets/audio/exp3.wav', 'static')
+exp8 = la.newSource('assets/audio/exp8.wav', 'static')
+pow3 = la.newSource('assets/audio/pow3.wav', 'static')
+foot3 = la.newSource('assets/audio/foot3.wav', 'static')
+foot3:setVolume(0.3)
+foot3:setLooping(true)
 
 -- classes
 Class = require 'libs/class'
@@ -56,7 +67,7 @@ debug = false
 function love.load()
     lw.setTitle('Telekinessball')
 
-    lg.setFont(assets.fonts.courier_prime(72))
+    lg.setFont(assets.fonts.Graph35pix(64))
     
     gamestate.registerEvents()
     gamestate.switch(startScreen)
@@ -67,7 +78,5 @@ function love.keypressed(k)
         push:switchFullscreen()
     elseif k == 'q' or k == 'escape' then
         le.quit()
-    elseif k == 'm' then
-    
     end
 end

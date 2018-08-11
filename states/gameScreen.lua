@@ -15,9 +15,15 @@ local walls = {
                 Wall(400, -5, 800, 10),
                 Wall(400, 455, 800, 10),
                 }
+
+local scores = {0, 0}
+
 local balls = {
-                Ball(400, 125, assets.sprites.baseball),
-                Ball(400, 325, assets.sprites.baseball)
+                Ball(400, 25, assets.sprites.ball),
+                Ball(400, 125, assets.sprites.ball),
+                Ball(400, 225, assets.sprites.ball),
+                Ball(400, 325, assets.sprites.ball),
+                Ball(400, 425, assets.sprites.ball),
                 }
 
 local p1 = Player(300, 225, spritesheet, plAnims, colors.aqua)
@@ -26,13 +32,16 @@ p2.facing = -1
 
 function gameScreen:reset()
     screen:setShake(10)
+    scores[0], scores[1] = 0, 0
 end
 
 function gameScreen:enter()
     self:reset()
+    exp3:play()
 end
 
 function gameScreen:update(dt)
+    
     local dx, dy = 0, 0
     screen:update(dt)
     
@@ -65,14 +74,17 @@ function gameScreen:draw()
     effect(function()
     
     screen:apply()
+    
     lg.draw(assets.sprites.field1, 0, 0)
-    p1:draw()
-    p2:draw()
-
+    
     -- draw balls
     for i,ball in ipairs(balls) do
         ball:draw()
     end
+    
+    -- draw player
+    p1:draw()
+    p2:draw()
     
     end)
     

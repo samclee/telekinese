@@ -79,17 +79,22 @@ function Player:launchAll()
         table.remove(self.grabbedBalls, i)
     end
     
+    exp8:play()
     screen:setShake(20)
 end
 
 function Player:grabBalls(balls)
+    local ballGrabbed = false
     for i,ball in ipairs(balls) do
         if ball.status == 0 and (ball:getCenter() - self:getCenter()):len() < telekinesisRadius then
             ball.velVec.x, ball.velVec.y = 0, 0
             ball.status = 1
             table.insert(self.grabbedBalls, ball)
+            ballGrabbed = true
         end
     end
+    
+    if ballGrabbed then pow3:play() end
 end
 
 function Player:action(balls)
