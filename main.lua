@@ -42,6 +42,7 @@ bgm:play()
 exp3 = la.newSource('assets/audio/exp3.wav', 'static')
 exp8 = la.newSource('assets/audio/exp8.wav', 'static')
 pow3 = la.newSource('assets/audio/pow3.wav', 'static')
+hit1 = la.newSource('assets/audio/hit1.wav', 'static')
 
 step3 = la.newSource('assets/audio/stairs3.wav', 'static')
 step3:setVolume(0.5)

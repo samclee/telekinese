@@ -48,7 +48,7 @@ function Ball:update(dt, p1, p2)
                 else
                     self.velVec.x = self.velVec.x * -1
                 end
-                if self.velVec:len() > 5 then exp3:play() end
+                if self.velVec:len() > 5 then hit1:play() end
             elseif otherObj.id == 'ball' then
                 -- trade
                 --[[local tx, ty = otherObj.velVec.x, otherObj.velVec.y
