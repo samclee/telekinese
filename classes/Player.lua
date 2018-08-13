@@ -127,12 +127,6 @@ function Player:draw()
     lg.setColor(self.color)
     --lg.draw(self.sprite, self.pos.x, self.pos.y)
     self.curAnim:draw(self.sheet, self.pos.x + self.w / 2, self.pos.y, 0, self.facing, 1, self.w / 2)
-
-    -- debug
-    if debug then
-        lg.setColor(colors.red[1], colors.red[2], colors.red[3], 0.8)
-        lg.rectangle('fill', self.pos.x, self.pos.y, self.w, self.h)
-    end
     
     lg.setColor(colors.white)
 end

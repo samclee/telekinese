@@ -30,15 +30,10 @@ function startScreen:draw()
     lg.setFont(fontSml)
     lg.printf('samchristopherlee.com', 0, 350, gameW, 'center')
     lg.printf('github.com/YoungTheRhino', 0, 390, gameW, 'center')
-    
-    
+     
     end)
     
     push:finish()
-end
-
-function startScreen:keypressed(k)
-    --gamestate.switch(gameScreen)
 end
 
 return startScreen

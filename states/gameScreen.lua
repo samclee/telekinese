@@ -31,11 +31,11 @@ local goals = {
 local scores = {0, 0}
 
 local balls = {
-                Ball(400-24, 225-24, assets.sprites.ball),
-                Ball(340-24, 125-24, assets.sprites.ball),
-                Ball(460-24, 125-24, assets.sprites.ball),
-                Ball(340-24, 325-24, assets.sprites.ball),
-                Ball(460-24, 325-24, assets.sprites.ball),
+                Ball(0, 0, assets.sprites.ball),
+                Ball(0, 0, assets.sprites.ball),
+                Ball(0, 0, assets.sprites.ball),
+                Ball(0, 0, assets.sprites.ball),
+                Ball(0, 0, assets.sprites.ball),
                 }
 local ballLocs = { {400-24, 225-24},
                    {340-24, 125-24},
@@ -87,7 +87,7 @@ function gameScreen:update(dt)
     local dx, dy = 0, 0
     screen:update(dt)
     
-    -- p1 input
+    -- p1 input --
     p1input:update()
     -- movement
     local ix, iy = p1input:get('move')
@@ -105,7 +105,7 @@ function gameScreen:update(dt)
         end
     end
     
-    -- p2 input
+    -- p2 input --
     p2input:update()
     --movement
     dx, dy = 0, 0
@@ -151,8 +151,8 @@ function gameScreen:draw()
     end
     
     for i,goal in ipairs(goals) do
-            goal:draw()
-        end
+        goal:draw()
+    end
     
     -- draw player
     p1:draw()
@@ -163,7 +163,6 @@ function gameScreen:draw()
     lg.printf(scores[1] .. '/10', 20, 20, gameW, 'left')
     lg.setColor(colors.orange)
     lg.printf(scores[2] .. '/10', -20, 20, gameW, 'right')
-    --lg.printf(scores[1] .. '/10      ' .. scores[2] .. '/10', 0, 28, gameW, 'center')
     
     -- game over stuff
     if gameEnd then 
