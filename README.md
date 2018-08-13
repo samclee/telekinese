@@ -1,4 +1,29 @@
 # Telekinessball
-Man I miss working with other people and making things. That's why I'm making this game. The goal is to make this game as simple as possible. It's just going to use the control stick and a single button.
 
-WASD to move p1. F to fullscreen. Q or escape to quit
+A two-player game of telekinetic soccer! Use a single button to levitate and hurl soccer balls across the field, with the winner being the first to 10 points
+
+## Controls
+### Player 1
+#### Keyboard
+Movement - WASD
+Action - space
+#### Controller
+Movement - left stick or d-pad
+Action - A
+Reset - start
+
+### Player 2
+#### Keyboard
+Movement - arrow keys
+Action - enter
+#### Controller
+Movement - left stick or d-pad
+Action - A
+Reset - start
+
+### Assorted controls
+Reset - r
+Fullscreen - f
+Quit - q or escape
+
+Music: https://roccow.bandcamp.com/track/swingjeding
