@@ -128,5 +128,8 @@ function love.keypressed(k)
     elseif k == 'q' or k == 'escape' then
         le.quit()
     end
-    
+end
+
+function clamp(low, val, high)
+    print('hi')
 end
