@@ -7,7 +7,6 @@ function Ball:init(cx, cy, sprite)
     self.status = 0 -- 0 is moveable, 1 is held
     self.auraColor = colors.white
     self.auraRad = 35
-    self.inGoal = false
 
     Entity.init(self, cx - sprite:getWidth() / 2, cy - sprite:getHeight() / 2, sprite:getWidth(), sprite:getHeight())
 
@@ -46,7 +45,6 @@ function Ball:update(dt, p1, p2)
         end
 
         -- collision
-        local notInGoal = true
         for i=1, len do
             local col = cols[i]
             local otherObj = col.other
@@ -61,13 +59,10 @@ function Ball:update(dt, p1, p2)
             elseif otherObj.id == 'ball' then
                 -- ball x ball collision
                 local sumVec = self.velVec + otherObj.velVec
-                self.velVec.x, self.velVec.y = sumVec.x * -0.5, sumVec.y * -0.5
+                self.velVec.x, self.velVec.y = sumVec.x * -0.8, sumVec.y * -0.8
                 otherObj.velVec.x, otherObj.velVec.y = sumVec.x * 0.8, sumVec.y * 0.8
-            elseif otherObj.id == 'goal' then
-                notInGoal = false
             end
         end -- for all collisions
-        if notInGoal then self.inGoal = false end
     end -- if ball is active
 
     self.pos.x, self.pos.y = actualX, actualY
@@ -92,7 +87,19 @@ function Ball:draw()
 end
 
 function Ball:enterFromSide()
-
+    local low, high = 60, 120
+    local newY = 370
+    
+    if lm.random() > 0.5 then
+        low, high = low + 180, high + 180
+        newY = 30
+    end
+    
+    local newAngle = lm.random(low, high)
+    
+    world:update(self, 376, newY)
+    self.pos.x, self.pos.y = 376, newY
+    self.velVec = vec.fromPolar(math.rad(newAngle)) * ejectStr
 end
 
 return Ball

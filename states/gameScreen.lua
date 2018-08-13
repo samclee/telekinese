@@ -15,6 +15,12 @@ local walls = {
                 Wall(805, 225, 10, 450), -- right
                 Wall(400, -5, 800, 10), -- top
                 Wall(400, 455, 800, 10), --btm
+                
+                Wall(32 * 7.5, 32 * 4, 32, 64), --TL
+                Wall(32 * 7.5, 32 * 10, 32, 64), --BL
+                Wall(32 * 17.5, 32 * 4, 32, 64), --TR
+                Wall(32 * 17.5, 32 * 10, 32, 64), --BR
+
                 }
 
 local goals = {
@@ -67,6 +73,7 @@ function gameScreen:reset()
 end
 
 function gameScreen:enter()
+    lg.setFont(fontBig)
     self:reset()
 end
 
@@ -138,13 +145,19 @@ function gameScreen:draw()
     lg.setColor(colors.white)
     lg.printf(scores[1] .. '/10      ' .. scores[2] .. '/10', 0, 28, gameW, 'center')
     
+    -- game over stuff
     if gameEnd then 
+        -- trophy
         local winX, winY = p1.pos.x, p1.pos.y
         if scores[2] >= 10 then
             winX, winY = p2.pos.x, p2.pos.y
         end
         
         lg.draw(trophy, winX - 8, winY - 55)
+        
+        -- game over
+        lg.printf('GAME OVER', 0, 200, gameW, 'center')
+        -- button animation
     end
     
     end)
