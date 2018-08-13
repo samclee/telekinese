@@ -6,6 +6,12 @@ end
 
 function startScreen:update(dt)
     canim:update(dt)
+    p1input:update()
+    p2input:update()
+    
+    if p1input:pressed('action') or p2input:pressed('action') then
+        gamestate.switch(gameScreen)
+    end
 end
 
 function startScreen:draw()
@@ -32,7 +38,7 @@ function startScreen:draw()
 end
 
 function startScreen:keypressed(k)
-    gamestate.switch(gameScreen)
+    --gamestate.switch(gameScreen)
 end
 
 return startScreen
