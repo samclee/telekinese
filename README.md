@@ -9,7 +9,9 @@ Movement - WASD
 Action - space
 #### Controller
 Movement - left stick or d-pad
+
 Action - A
+
 Reset - start
 
 ### Player 2
@@ -18,12 +20,16 @@ Movement - arrow keys
 Action - enter
 #### Controller
 Movement - left stick or d-pad
+
 Action - A
+
 Reset - start
 
 ### Assorted controls
 Reset - r
+
 Fullscreen - f
+
 Quit - q or escape
 
 Music: https://roccow.bandcamp.com/track/swingjeding
