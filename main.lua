@@ -42,6 +42,7 @@ canim = anim8.newAnimation(cg('1-2', 1), 0.2)
 -- audio
 require 'libs/slam'
 bgm = la.newSource('assets/audio/SwingJeDing.ogg', 'stream')
+-- music: https://roccow.bandcamp.com/track/swingjeding
 bgm:setLooping(true)
 bgm:setVolume(0.3)
 bgm:play()
@@ -128,8 +129,4 @@ function love.keypressed(k)
     elseif k == 'q' or k == 'escape' then
         le.quit()
     end
-end
-
-function clamp(low, val, high)
-    print('hi')
 end
