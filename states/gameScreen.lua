@@ -1,6 +1,7 @@
 local gameScreen = {}
 
--- animation
+-- animation/visual
+local trophy = assets.sprites.trophy
 local spritesheet = assets.sprites.spritesheet
 local g = anim8.newGrid(32, 32, spritesheet:getWidth(), spritesheet:getHeight())
 local plAnims = {
@@ -17,23 +18,28 @@ local walls = {
                 }
 
 local goals = {
-                Goal(50, 225, 10, 450, 1),
-                Goal(750, 225, 10, 450, 2),
+                Goal(10, 225, 10, 128, 2),
+                Goal(790, 225, 10, 128, 1),
 }
 
 local scores = {0, 0}
 
 local balls = {
-                Ball(400, 25, assets.sprites.ball),
-                Ball(400, 125, assets.sprites.ball),
-                Ball(400, 225, assets.sprites.ball),
-                Ball(400, 325, assets.sprites.ball),
-                Ball(400, 425, assets.sprites.ball),
+                Ball(400-24, 225-24, assets.sprites.ball),
+                Ball(340-24, 125-24, assets.sprites.ball),
+                Ball(460-24, 125-24, assets.sprites.ball),
+                Ball(340-24, 325-24, assets.sprites.ball),
+                Ball(460-24, 325-24, assets.sprites.ball),
                 }
+local ballLocs = { {400-24, 225-24},
+                   {340-24, 125-24},
+                   {460-24, 125-24},
+                   {340-24, 325-24},
+                   {460-24, 325-24},
+                   }
 
-local p1 = Player(300, 225, spritesheet, plAnims, colors.aqua, step3)
-local p2 = Player(500, 225, spritesheet, plAnims, colors.orange, step4)
-p2.facing = -1
+local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)
+local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, step4)
 
 local gameEnd = false
 
@@ -45,7 +51,19 @@ function gameScreen:reset()
     
     for i,ball in ipairs(balls) do
         ball.velVec.x, ball.velVec.y = 0, 0
+        local newLoc = ballLocs[i]
+        world:update(ball, newLoc[1], newLoc[2])
+        ball.pos.x, ball.pos.y =  newLoc[1], newLoc[2]
     end
+    
+    world:update(p1, 224, 6.5 * 32)
+    p1.pos.x, p1.pos.y = 224, 6.5 * 32
+    p1.facing = 1
+    
+    world:update(p2, 17 * 32, 6.5 * 32)
+    p2.pos.x, p2.pos.y = 17 * 32, 6.5 * 32
+    p2.facing = -1
+
 end
 
 function gameScreen:enter()
@@ -101,30 +119,32 @@ function gameScreen:draw()
     
     screen:apply()
     
-    lg.draw(assets.sprites.field1, 0, 0)
+    lg.draw(assets.sprites.field, 0, 0)
     
     -- draw balls
     for i,ball in ipairs(balls) do
         ball:draw()
     end
     
-    if debug then
-        for i,goal in ipairs(goals) do
+    for i,goal in ipairs(goals) do
             goal:draw()
         end
-    end
     
     -- draw player
     p1:draw()
     p2:draw()
     
     -- draw scores
-    lg.setColor(colors.black)
-    lg.printf(scores[1] .. '/10    ' .. scores[2] .. '/10', 0, 50, gameW, 'center')
-    
     lg.setColor(colors.white)
-    if scores[1] >= 10 then
-        lg.draw(assets.sprites.trophy, 330, 50)
+    lg.printf(scores[1] .. '/10      ' .. scores[2] .. '/10', 0, 28, gameW, 'center')
+    
+    if gameEnd then 
+        local winX, winY = p1.pos.x, p1.pos.y
+        if scores[2] >= 10 then
+            winX, winY = p2.pos.x, p2.pos.y
+        end
+        
+        lg.draw(trophy, winX - 8, winY - 55)
     end
     
     end)
@@ -135,16 +155,22 @@ end
 function gameScreen:keypressed(k)
     if k == 'r' then
         self:reset()
-    elseif k == 'e' then
-        gamestate.switch(startScreen)
     end
     
     if k == 'space' then
-        p1:action(balls)
+        if gameEnd then
+            self:reset()
+        else
+            p1:action(balls)
+        end
     end
     
     if k == 'return' then
-        p2:action(balls)
+        if gameEnd then
+            self:reset()
+        else
+            p2:action(balls)
+        end
     end
 end
 

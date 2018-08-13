@@ -53,9 +53,9 @@ function Ball:update(dt, p1, p2)
             if otherObj.id == 'wall' or otherObj.id == 'player' then
                 -- bounce
                 if col.normal.x == 0 then
-                    self.velVec.y = self.velVec.y * -0.75
+                    self.velVec.y = self.velVec.y * -0.9
                 else
-                    self.velVec.x = self.velVec.x * -0.75
+                    self.velVec.x = self.velVec.x * -0.9
                 end
                 if self.velVec:len() > 8 then hit1:play() end
             elseif otherObj.id == 'ball' then
@@ -89,6 +89,10 @@ function Ball:draw()
         end
         lg.rectangle('fill', self.pos.x, self.pos.y, self.w, self.h)
     end
+end
+
+function Ball:enterFromSide()
+
 end
 
 return Ball

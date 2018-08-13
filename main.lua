@@ -70,7 +70,7 @@ gameScreen = require 'states.gameScreen'
 telekinesisRadius = 80
 kickStr = 2
 launchStr = 45
-debug = true
+debug = false
 
 function love.load()
     lw.setTitle('Telekinessball')

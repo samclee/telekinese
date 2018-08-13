@@ -26,7 +26,7 @@ function Goal:update(dt, scores)
         if otherObj.id == 'ball' and otherObj.inGoal == false then
             scores[self.side] = scores[self.side] + 1
             otherObj.inGoal = true
-            otherObj.velVec = otherObj.velVec:normalized() * -launchStr / 2
+            otherObj.velVec = otherObj.velVec:normalized() * -launchStr / 2 -- launches out, change this
             exp3:play()
         end
     end
