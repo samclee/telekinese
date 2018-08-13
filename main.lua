@@ -68,7 +68,8 @@ p1input = baton.new{
         right = {'key:d', 'axis:leftx+', 'button:dpright'},
         up = {'key:w', 'axis:lefty-', 'button:dpup'},
         down = {'key:s', 'axis:lefty+', 'button:dpdown'},
-        action = {'key:space', 'button:a'}
+        action = {'key:space', 'button:a'},
+        reset = {'key:r', 'button:start'}
     },
     pairs = {
         move = {'left', 'right', 'up', 'down'}
@@ -82,7 +83,8 @@ p2input = baton.new{
         right = {'key:right', 'axis:leftx+', 'button:dpright'},
         up = {'key:up', 'axis:lefty-', 'button:dpup'},
         down = {'key:down', 'axis:lefty+', 'button:dpdown'},
-        action = {'key:return', 'button:a'}
+        action = {'key:return', 'button:a'},
+        reset = {'key:r', 'button:start'}
     },
     pairs = {
         move = {'left', 'right', 'up', 'down'}

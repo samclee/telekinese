@@ -96,13 +96,17 @@ function gameScreen:update(dt)
     if (ix < 0) then dx = dx - 1 end
     if (ix > 0) then dx = dx + 1 end
     p1:update(dt, dx, dy)
-    -- keypress
+    -- keypresses
     if p1input:pressed('action') then
         if gameEnd then
             self:reset()
         else
             p1:action(balls)
         end
+    end
+    
+    if p1input:pressed('reset') then
+        self:reset()
     end
     
     -- p2 input --
@@ -116,13 +120,17 @@ function gameScreen:update(dt)
     if (ix < 0) then dx = dx - 1 end
     if (ix > 0) then dx = dx + 1 end
     p2:update(dt, dx, dy)
-    -- keypress
+    -- keypresses
     if p2input:pressed('action') then
         if gameEnd then
             self:reset()
         else
             p2:action(balls)
         end
+    end
+    
+    if p2input:pressed('reset') then
+        self:reset()
     end
     
     -- update balls
