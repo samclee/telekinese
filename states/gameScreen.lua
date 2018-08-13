@@ -24,8 +24,8 @@ local walls = {
                 }
 
 local goals = {
-                Goal(10, 225, 10, 128, 2),
-                Goal(790, 225, 10, 128, 1),
+                Goal(7, 225, 14, 128, 2),
+                Goal(793, 225, 14, 128, 1),
 }
 
 local scores = {0, 0}
