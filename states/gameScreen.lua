@@ -82,6 +82,8 @@ function gameScreen:update(dt)
         gameEnd = true
     end
     
+    if gameEnd then canim:update(dt) end
+    
     local dx, dy = 0, 0
     screen:update(dt)
     
@@ -142,8 +144,11 @@ function gameScreen:draw()
     p2:draw()
     
     -- draw scores
-    lg.setColor(colors.white)
-    lg.printf(scores[1] .. '/10      ' .. scores[2] .. '/10', 0, 28, gameW, 'center')
+    lg.setColor(colors.aqua)
+    lg.printf(scores[1] .. '/10', 20, 20, gameW, 'left')
+    lg.setColor(colors.orange)
+    lg.printf(scores[2] .. '/10', -20, 20, gameW, 'right')
+    --lg.printf(scores[1] .. '/10      ' .. scores[2] .. '/10', 0, 28, gameW, 'center')
     
     -- game over stuff
     if gameEnd then 
@@ -153,11 +158,15 @@ function gameScreen:draw()
             winX, winY = p2.pos.x, p2.pos.y
         end
         
+        lg.setColor(colors.white)
         lg.draw(trophy, winX - 8, winY - 55)
         
-        -- game over
-        lg.printf('GAME OVER', 0, 200, gameW, 'center')
         -- button animation
+        canim:draw(csheet, 400 - 96, 200)
+        
+        -- game over
+        lg.setColor(colors.black)
+        lg.printf('GAME OVER', 0, 100, gameW, 'center')
     end
     
     end)

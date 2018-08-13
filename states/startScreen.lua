@@ -4,6 +4,10 @@ function startScreen:enter()
 
 end
 
+function startScreen:update(dt)
+    canim:update(dt)
+end
+
 function startScreen:draw()
     push:start()
     
@@ -11,6 +15,7 @@ function startScreen:draw()
     
     lg.setColor(colors.white)
     lg.rectangle('fill', 0, 0, gameW, gameH)
+    canim:draw(csheet, 400 - 96, 200)
 
     lg.setColor(colors.black)
     lg.setFont(fontBig)
