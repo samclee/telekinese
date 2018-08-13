@@ -1,6 +1,6 @@
 # Telekinessball
 
-A two-player game of telekinetic soccer! Use a single button to levitate and hurl soccer balls across the field, with the winner being the first to 10 points
+A two-player game of telekinetic soccer! Use a single button to levitate and hurl soccer balls across the field, with the winner being the first to 10 points. To use controllers, please connect them before running the game.
 
 ## Controls
 ### Player 1

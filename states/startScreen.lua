@@ -32,7 +32,7 @@ function startScreen:draw()
     
     if lj.getJoystickCount() < 2 then
         lg.setColor(colors.red)
-        local msg = '(' .. lj.getJoystickCount() .. ') gamepads detected.\nTo use gamepads, please connect them and restart the game'
+        local msg = '(' .. lj.getJoystickCount() .. ') gamepads detected.\nTo use gamepads, please connect them and restart.\nOtherwise, press \'action\''
         lg.printf(msg, 0, 200, gameW, 'center')
     else
         lg.setColor(colors.white)
