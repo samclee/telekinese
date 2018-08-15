@@ -80,10 +80,10 @@ p1input = baton.new{
 
 p2input = baton.new{
     controls = {
-        left = {'key:left', 'axis:leftx-', 'button:dpleft'},
-        right = {'key:right', 'axis:leftx+', 'button:dpright'},
-        up = {'key:up', 'axis:lefty-', 'button:dpup'},
-        down = {'key:down', 'axis:lefty+', 'button:dpdown'},
+        left = {'key:j', 'axis:leftx-', 'button:dpleft'},
+        right = {'key:l', 'axis:leftx+', 'button:dpright'},
+        up = {'key:i', 'axis:lefty-', 'button:dpup'},
+        down = {'key:k', 'axis:lefty+', 'button:dpdown'},
         action = {'key:return', 'button:a'},
         reset = {'key:r', 'button:start'}
     },
@@ -129,5 +129,7 @@ function love.keypressed(k)
         push:switchFullscreen()
     elseif k == 'q' or k == 'escape' then
         le.quit()
+    elseif k == 'm' then
+        bgm:setVolume(0)
     end
 end
