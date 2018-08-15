@@ -21,6 +21,7 @@ function startScreen:draw()
     
     lg.setColor(colors.white)
     lg.draw(assets.sprites.field, 0, 0)
+    canim:draw(csheet, 400 - 96, 200)
 
     lg.setColor(colors.black)
     lg.setFont(fontBig)
@@ -29,7 +30,8 @@ function startScreen:draw()
     lg.setFont(fontSml)
     lg.printf('samchristopherlee.com', 0, 350, gameW, 'center')
     lg.printf('github.com/YoungTheRhino', 0, 390, gameW, 'center')
-   
+    
+    lg.setColor(colors.white)
      
     end)
     

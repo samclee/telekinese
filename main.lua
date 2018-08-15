@@ -109,7 +109,7 @@ gameScreen = require 'states.gameScreen'
 
 -- game vars
 telekinesisRadius = 80
-smlTelekinesisRadius = 40
+smlTelekinesisRadius = 50
 kickStr = 2
 launchStr = 45
 ejectStr = 30

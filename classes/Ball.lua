@@ -7,6 +7,7 @@ function Ball:init(cx, cy, sprite)
     self.status = 0 -- 0 is moveable, 1 is held
     self.auraColor = colors.white
     self.auraRad = 35
+    self.opacity = 0.6
 
     Entity.init(self, cx - sprite:getWidth() / 2, cy - sprite:getHeight() / 2, sprite:getWidth(), sprite:getHeight())
 
@@ -69,9 +70,11 @@ function Ball:update(dt, p1, p2)
 end
 
 function Ball:draw()
-    lg.setColor(self.auraColor[1], self.auraColor[2], self.auraColor[3], 0.7)
+    -- aura
+    lg.setColor(self.auraColor[1], self.auraColor[2], self.auraColor[3], self.opacity)
     lg.circle('fill', self.pos.x + self.w / 2, self.pos.y + self.h / 2, self.auraRad  + lm.random(-1, 1))
     
+    -- sprite
     lg.setColor(colors.white)
     lg.draw(self.sprite, self.pos.x + self.w / 2, self.pos.y + self.h / 2, 
                 self.velVec:len() % (2 * math.pi), 1, 1, self.w / 2, self.h / 2)
