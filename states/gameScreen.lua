@@ -46,7 +46,7 @@ local ballLocs = { {400-24, 225-24},
 
 local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)
 local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, step4)
-
+local maxScore = 5
 local gameEnd = false
 
 function gameScreen:reset()
@@ -76,7 +76,7 @@ function gameScreen:enter()
 end
 
 function gameScreen:update(dt)
-    if scores[1] >= 10 or scores[2] >= 10 then
+    if scores[1] >= maxScore or scores[2] >= maxScore then
         gameEnd = true
     end
     
@@ -174,9 +174,9 @@ function gameScreen:draw()
     
     -- draw scores
     lg.setColor(colors.aqua)
-    lg.printf(scores[1] .. '/10', 20, 20, gameW, 'left')
+    lg.printf(scores[1] .. '/' .. maxScore, 20, 20, gameW, 'left')
     lg.setColor(colors.orange)
-    lg.printf(scores[2] .. '/10', -20, 20, gameW, 'right')
+    lg.printf(scores[2] .. '/' .. maxScore, -20, 20, gameW, 'right')
     
     -- game over stuff
     if gameEnd then 

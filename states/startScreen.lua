@@ -20,7 +20,7 @@ function startScreen:draw()
     effect(function()
     
     lg.setColor(colors.white)
-    lg.rectangle('fill', 0, 0, gameW, gameH)
+    lg.draw(assets.sprites.field, 0, 0)
 
     lg.setColor(colors.black)
     lg.setFont(fontBig)
@@ -29,15 +29,7 @@ function startScreen:draw()
     lg.setFont(fontSml)
     lg.printf('samchristopherlee.com', 0, 350, gameW, 'center')
     lg.printf('github.com/YoungTheRhino', 0, 390, gameW, 'center')
-    
-    if lj.getJoystickCount() < 2 then
-        lg.setColor(colors.red)
-        local msg = '(' .. lj.getJoystickCount() .. ') gamepads detected.\nTo use gamepads, please connect them and restart.\nOtherwise, press \'action\''
-        lg.printf(msg, 0, 200, gameW, 'center')
-    else
-        lg.setColor(colors.white)
-        canim:draw(csheet, 400 - 96, 200)
-    end
+   
      
     end)
     

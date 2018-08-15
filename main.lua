@@ -15,8 +15,8 @@ colors = require 'libs/colors'
 bump = require 'libs/bump'
 world = bump.newWorld()
 moonshine = require 'libs/moonshine'
-effect = moonshine(moonshine.effects.crt)
-            .chain(moonshine.effects.scanlines)
+effect = moonshine(moonshine.effects.scanlines)
+            .chain(moonshine.effects.crt)
 effect.scanlines.opacity = 0.2
 
 -- resolution
@@ -109,6 +109,7 @@ gameScreen = require 'states.gameScreen'
 
 -- game vars
 telekinesisRadius = 80
+smlTelekinesisRadius = 40
 kickStr = 2
 launchStr = 45
 ejectStr = 30
