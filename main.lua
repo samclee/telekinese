@@ -42,9 +42,10 @@ canim = anim8.newAnimation(cg('1-2', 1), 0.2)
 -- audio
 require 'libs/slam'
 bgm = la.newSource('assets/audio/SwingJeDing.ogg', 'stream')
+
 -- music: https://roccow.bandcamp.com/track/swingjeding
 bgm:setLooping(true)
-bgm:setVolume(0.3)
+bgm:setVolume(0)
 bgm:play()
 
 exp3 = la.newSource('assets/audio/exp3.ogg', 'static')
