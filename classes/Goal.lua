@@ -46,7 +46,7 @@ function Goal:update(dt, scores)
         
         if otherObj.id == 'ball' and otherObj.status == 0 then
             scores[self.side] = scores[self.side] + 1
-            otherObj:hibernate()
+            otherObj:enterFromSide()
             exp3:play()
             self.psystem:start()
             self.psystem:emit(30)
