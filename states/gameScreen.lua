@@ -46,7 +46,7 @@ local ballLocs = { {400-24, 225-24},
 
 local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)
 local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, step4)
-local maxScore = 1
+local maxScore = 7
 local gameEnd = false
 
 -- timeout variables
@@ -74,6 +74,8 @@ function gameScreen:reset()
     p2:teleport(544, 208)
     p2.facing = -1
     
+    bgm:setVolume(1)
+    
     -- time out variables
     countingIdleTime = false
     timeIdleStart = 0
@@ -95,7 +97,6 @@ function gameScreen:update(dt)
     
     if gameEnd then 
         canim:update(dt) 
-        canim2:update(dt)
     end
     
     local dx, dy = 0, 0
@@ -224,7 +225,7 @@ function gameScreen:draw()
         
         -- button animation
         canim:draw(csheet, 400 - 96 - 290, 320)
-        canim2:draw(csheet, 400 - 96 + 290, 320)
+        canim:draw(csheet, 400 - 96 + 290, 320)
         
         -- game over
         lg.setColor(colors.black)

@@ -36,18 +36,19 @@ anim8 = require 'libs/anim8'
 screen = require 'libs/shack'
 screen:setDimensions(push:getDimensions())
 fontBig = assets.fonts.Graph35pix(64)
-fontSml = assets.fonts.Graph35pix(32)
+fontSml = assets.fonts.Graph35pix(24)
+fontTitle = assets.fonts.FFFFORWA(64)
 csheet = assets.sprites.controllersheet
 cg = anim8.newGrid(192, 108, csheet:getWidth(), csheet:getHeight())
 canim = anim8.newAnimation(cg('1-2', 1), 0.2)
-canim2 = anim8.newAnimation(cg('1-2', 1), 0.2)
 
 -- audio
 require 'libs/slam'
 bgm = la.newSource('assets/audio/SwingJeDing.ogg', 'stream')
--- music: https://roccow.bandcamp.com/track/swingjeding
+-- music: https://roccow.bandcamp.com
 bgm:setLooping(true)
-bgm:setVolume(0.0)
+fullVol = 0.15
+bgm:setVolume(fullVol)
 bgm:play()
 
 exp3 = la.newSource('assets/audio/exp3.ogg', 'static')
@@ -69,7 +70,6 @@ smlTelekinesisRadius = 50
 kickStr = 2
 launchStr = 45
 ejectStr = 30
-debug = false
 
 -- joystick controls
 baton = require 'libs/baton'
@@ -123,7 +123,6 @@ gameScreen = require 'states.gameScreen'
 function love.load()
     lw.setTitle('Telekinessball')
 
-    lg.setFont(fontBig)
     
     love.graphics.setLineWidth( 3 )
     
@@ -137,6 +136,6 @@ function love.keypressed(k)
     elseif k == 'q' or k == 'escape' then
         le.quit()
     elseif k == 'm' then
-        bgm:setVolume(0)
+        print(bgm:getVolume())
     end
 end
