@@ -4,10 +4,12 @@ function Ball:init(cx, cy, sprite)
     self.id = 'ball'
     self.sprite = sprite
     self.velVec = vec(0, 0)
-    self.status = 0 -- 0 is moveable, 1 is held
+    self.status = 0 -- 0 is moveable, 1 is held, 2 is hibernating
     self.auraColor = colors.white
     self.auraRad = 35
     self.opacity = 0.6
+    self.hibernateStart = 0
+    self.hibernateAmt = 0
 
     Entity.init(self, cx - sprite:getWidth() / 2, cy - sprite:getHeight() / 2, sprite:getWidth(), sprite:getHeight())
 
@@ -64,7 +66,12 @@ function Ball:update(dt, p1, p2)
                 otherObj.velVec.x, otherObj.velVec.y = sumVec.x * 0.8, sumVec.y * 0.8
             end
         end -- for all collisions
-    end -- if ball is active
+    --- if ball is active ---
+    elseif self.status == 2 then
+        if lt.getTime() - self.hibernateStart > self.hibernateAmt then
+            self:enterFromSide()
+        end
+    end
 
     self.pos.x, self.pos.y = actualX, actualY
 end
@@ -81,19 +88,29 @@ function Ball:draw()
 end
 
 function Ball:enterFromSide()
+    -- default to bottom
     local low, high = 60, 120
     local newY = 370
     
-    if lm.random() > 0.5 then
+    --[[if lm.random() > 0.5 then --possibly go to bottom
         low, high = low + 180, high + 180
         newY = 30
-    end
+    end]]--
     
     local newAngle = lm.random(low, high)
     
-    world:update(self, 376, newY)
-    self.pos.x, self.pos.y = 376, newY
-    self.velVec = vec.fromPolar(math.rad(newAngle)) * ejectStr
+    world:update(self, 400, newY)
+    self.pos.x, self.pos.y = 400, newY
+    self.velVec = vec.fromPolar(math.rad(90)) * ejectStr
+    self.status = 0
+end
+
+function Ball:hibernate()
+    world:update(self, -100, -100)
+    self.pos.x, self.pos.y = -100, -100
+    self.hibernateAmt = 0.5--lm.random(1, 3)
+    self.hibernateStart = lt.getTime()
+    self.status = 2
 end
 
 return Ball
