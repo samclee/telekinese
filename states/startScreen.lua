@@ -39,8 +39,5 @@ function startScreen:draw()
     push:finish()
 end
 
-function startScreen:keypressed(k)
-
-end
 
 return startScreen

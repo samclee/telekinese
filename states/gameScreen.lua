@@ -46,9 +46,14 @@ local ballLocs = { {400-24, 225-24},
 
 local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)
 local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, step4)
-local maxScore = 5
+local maxScore = 1
 local gameEnd = false
-local maxIdleTime = 7
+
+-- timeout variables
+local maxIdleTime = 15
+local timeIdleStart = 0
+local timeIdle = 0
+local countingIdleTime = false
 
 function gameScreen:reset()
     screen:setShake(10)
@@ -68,7 +73,11 @@ function gameScreen:reset()
     
     p2:teleport(544, 208)
     p2.facing = -1
-
+    
+    -- time out variables
+    countingIdleTime = false
+    timeIdleStart = 0
+    timeIdle = 0
 end
 
 function gameScreen:enter()
@@ -78,11 +87,16 @@ end
 
 function gameScreen:update(dt)
     Timer.update(dt)
+    
+    local anyInputPressed = false
     if scores[1] >= maxScore or scores[2] >= maxScore then
         gameEnd = true
     end
     
-    if gameEnd then canim:update(dt) end
+    if gameEnd then 
+        canim:update(dt) 
+        canim2:update(dt)
+    end
     
     local dx, dy = 0, 0
     screen:update(dt)
@@ -91,6 +105,7 @@ function gameScreen:update(dt)
     p1input:update()
     -- movement
     local ix, iy = p1input:get('move')
+    if iy ~= 0 or ix ~= 0 then anyInputPressed = true end
     if (iy < 0) then dy = dy - 1 end
     if (iy > 0) then dy = dy + 1 end
     if (ix < 0) then dx = dx - 1 end
@@ -98,6 +113,7 @@ function gameScreen:update(dt)
     p1:update(dt, dx, dy)
     -- keypresses
     if p1input:pressed('action') then
+        anyInputPressed = true
         if gameEnd then
             self:reset()
         else
@@ -106,6 +122,7 @@ function gameScreen:update(dt)
     end
     
     if p1input:pressed('reset') then
+        anyInputPressed = true
         self:reset()
     end
     
@@ -119,6 +136,7 @@ function gameScreen:update(dt)
     dx, dy = 0, 0
     ix, iy = 0, 0
     ix, iy = p2input:get('move')
+    if iy ~= 0 or ix ~= 0 then anyInputPressed = true end
     if (iy < 0) then dy = dy - 1 end
     if (iy > 0) then dy = dy + 1 end
     if (ix < 0) then dx = dx - 1 end
@@ -126,6 +144,7 @@ function gameScreen:update(dt)
     p2:update(dt, dx, dy)
     -- keypresses
     if p2input:pressed('action') then
+        anyInputPressed = true
         if gameEnd then
             self:reset()
         else
@@ -134,7 +153,19 @@ function gameScreen:update(dt)
     end
     
     if p2input:pressed('reset') then
+        anyInputPressed = true
         self:reset()
+    end
+    
+    if not anyInputPressed then
+        if not countingIdleTime then
+            countingIdleTime = true
+            timeIdleStart = lt.getTime()
+        else
+            timeIdle = lt.getTime() - timeIdleStart
+        end
+    else
+        countingIdleTime = false
     end
     
     if p2.pos.x < -p2.w or p2.pos.x > gameW or p2.pos.y < -p2.h or p2.pos.y > gameH then
@@ -175,13 +206,13 @@ function gameScreen:draw()
     p2:draw()
     
     -- draw scores
-    lg.setColor(colors.aqua)
-    lg.printf(scores[1] .. '/' .. maxScore, 20, 20, gameW, 'left')
-    lg.setColor(colors.orange)
-    lg.printf(scores[2] .. '/' .. maxScore, -20, 20, gameW, 'right')
-    
+    if not gameEnd then
+        lg.setColor(colors.aqua)
+        lg.printf(scores[1] .. '/' .. maxScore, 20, 20, gameW, 'left')
+        lg.setColor(colors.orange)
+        lg.printf(scores[2] .. '/' .. maxScore, -20, 20, gameW, 'right')
     -- game over stuff
-    if gameEnd then 
+    else
         -- trophy
         local winX, winY = p1.pos.x, p1.pos.y
         if scores[2] >= 10 then
@@ -192,11 +223,24 @@ function gameScreen:draw()
         lg.draw(trophy, winX - 8, winY - 55)
         
         -- button animation
-        canim:draw(csheet, 400 - 96, 200)
+        canim:draw(csheet, 400 - 96 - 290, 320)
+        canim2:draw(csheet, 400 - 96 + 290, 320)
         
         -- game over
         lg.setColor(colors.black)
-        lg.printf('GAME OVER', 0, 100, gameW, 'center')
+        lg.printf('GAME', 20, 20, gameW, 'left')
+        lg.printf('OVER', -20, 20, gameW, 'right')
+    end
+    
+    if countingIdleTime and timeIdle > maxIdleTime - 6 then 
+        lg.setColor(0, 0, 0, 0.9)
+        lg.rectangle('fill', 100, 180, 600, 100)
+        lg.setColor(1, 1, 1, 0.9)
+        lg.printf('RESET IN ' .. math.floor(maxIdleTime - timeIdle), 0, 200, gameW, 'center')
+        
+        if timeIdle > maxIdleTime then
+            gamestate.switch(startScreen)
+        end
     end
     
     end)
