@@ -48,6 +48,7 @@ local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)
 local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, step4)
 local maxScore = 5
 local gameEnd = false
+local maxIdleTime = 7
 
 function gameScreen:reset()
     screen:setShake(10)
@@ -76,6 +77,7 @@ function gameScreen:enter()
 end
 
 function gameScreen:update(dt)
+    Timer.update(dt)
     if scores[1] >= maxScore or scores[2] >= maxScore then
         gameEnd = true
     end

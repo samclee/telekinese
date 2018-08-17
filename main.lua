@@ -10,6 +10,7 @@ lj = love.joystick
 -- general libraries
 vec = require 'libs/vector'
 colors = require 'libs/colors'
+Timer = require "libs/timer"
 
 -- collision
 bump = require 'libs/bump'
@@ -42,10 +43,9 @@ canim = anim8.newAnimation(cg('1-2', 1), 0.2)
 -- audio
 require 'libs/slam'
 bgm = la.newSource('assets/audio/SwingJeDing.ogg', 'stream')
-
 -- music: https://roccow.bandcamp.com/track/swingjeding
 bgm:setLooping(true)
-bgm:setVolume(0)
+bgm:setVolume(0.0)
 bgm:play()
 
 exp3 = la.newSource('assets/audio/exp3.ogg', 'static')
@@ -60,6 +60,14 @@ step3:setLooping(true)
 step4 = la.newSource('assets/audio/stairs4.ogg', 'static')
 step4:setVolume(0.5)
 step4:setLooping(true)
+
+-- game vars
+telekinesisRadius = 80
+smlTelekinesisRadius = 50
+kickStr = 2
+launchStr = 45
+ejectStr = 30
+debug = false
 
 -- joystick controls
 baton = require 'libs/baton'
@@ -108,18 +116,14 @@ gamestate = require 'libs/gamestate'
 startScreen = require 'states.startScreen'
 gameScreen = require 'states.gameScreen'
 
--- game vars
-telekinesisRadius = 80
-smlTelekinesisRadius = 50
-kickStr = 2
-launchStr = 45
-ejectStr = 30
-debug = false
+
 
 function love.load()
     lw.setTitle('Telekinessball')
 
     lg.setFont(fontBig)
+    
+    love.graphics.setLineWidth( 3 )
     
     gamestate.registerEvents()
     gamestate.switch(startScreen)
