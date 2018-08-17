@@ -37,12 +37,10 @@ local clText = {{
 }
 
 local clTextIndex = 1
+local switchColorTimer  = 0
 
 function startScreen:enter()
-    Timer.every(0.6, 
-        function() 
-            clTextIndex =  (clTextIndex % 2) + 1
-        end)
+    colorSwitchStartTime = lt.getTime()
     bgm:setVolume(0.05)
 end
 
@@ -54,6 +52,11 @@ function startScreen:update(dt)
     
     if p1input:pressed('action') or p2input:pressed('action') then
         gamestate.switch(gameScreen)
+    end
+    
+    if lt.getTime() - colorSwitchStartTime > 0.5 then
+        clTextIndex =  (clTextIndex % 2) + 1
+        colorSwitchStartTime = lt.getTime()
     end
 end
 
