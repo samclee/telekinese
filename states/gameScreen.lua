@@ -35,13 +35,12 @@ local balls = {
                 Ball(0, 0, assets.sprites.ball),
                 Ball(0, 0, assets.sprites.ball),
                 Ball(0, 0, assets.sprites.ball),
-                Ball(0, 0, assets.sprites.ball),
                 }
-local ballLocs = { {400-24, 225-24},
-                   {340-24, 125-24},
-                   {460-24, 125-24},
-                   {340-24, 325-24},
-                   {460-24, 325-24},
+local ballLocs = {
+                   {340-24, 160-24},
+                   {460-24, 160-24},
+                   {340-24, 290-24},
+                   {460-24, 290-24},
                    }
 
 local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)

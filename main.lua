@@ -44,7 +44,7 @@ canim = anim8.newAnimation(cg('1-2', 1), 0.2)
 
 -- audio
 require 'libs/slam'
-bgm = la.newSource('assets/audio/SwingJeDing.ogg', 'stream')
+bgm = la.newSource('assets/audio/roccow.ogg', 'stream')
 -- music: https://roccow.bandcamp.com
 bgm:setLooping(true)
 fullVol = 0.2
@@ -123,6 +123,7 @@ gameScreen = require 'states.gameScreen'
 function love.load()
     lw.setTitle('Telekinessball')
 
+    push:switchFullscreen()
     
     love.graphics.setLineWidth( 3 )
     
@@ -135,7 +136,5 @@ function love.keypressed(k)
         push:switchFullscreen()
     elseif k == 'q' or k == 'escape' then
         le.quit()
-    elseif k == 'm' then
-        print(bgm:getVolume())
     end
 end

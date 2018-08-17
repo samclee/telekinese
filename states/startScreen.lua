@@ -41,7 +41,7 @@ local switchColorTimer  = 0
 
 function startScreen:enter()
     colorSwitchStartTime = lt.getTime()
-    bgm:setVolume(0.05)
+    bgm:setVolume(0.03)
 end
 
 function startScreen:update(dt)
