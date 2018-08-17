@@ -36,15 +36,14 @@ local clText = {{
 }
 }
 
-local idleStartTime = 0
 local clTextIndex = 1
 
 function startScreen:enter()
-    idleStartTime = lt.getTime()
-    Timer.every(0.3, 
+    Timer.every(0.6, 
         function() 
             clTextIndex =  (clTextIndex % 2) + 1
         end)
+    bgm:setVolume(0.05)
 end
 
 function startScreen:update(dt)
@@ -55,10 +54,6 @@ function startScreen:update(dt)
     
     if p1input:pressed('action') or p2input:pressed('action') then
         gamestate.switch(gameScreen)
-    end
-    
-    if lt.getTime() - idleStartTime > 3 and bgm:getVolume() > 0 then
-        bgm:setVolume(0)
     end
 end
 

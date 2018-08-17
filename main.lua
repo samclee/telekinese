@@ -47,7 +47,7 @@ require 'libs/slam'
 bgm = la.newSource('assets/audio/SwingJeDing.ogg', 'stream')
 -- music: https://roccow.bandcamp.com
 bgm:setLooping(true)
-fullVol = 0.15
+fullVol = 0.2
 bgm:setVolume(fullVol)
 bgm:play()
 

@@ -24,8 +24,8 @@ local walls = {
                 }
 
 local goals = {
-                Goal(7, 225, 14, 128, 1),
-                Goal(793, 225, 14, 128, 2),
+                Goal(7, 225, 14, 128, 2, colors.aqua),
+                Goal(793, 225, 14, 128, 1, colors.orange),
 }
 
 local scores = {0, 0}
@@ -50,7 +50,7 @@ local maxScore = 7
 local gameEnd = false
 
 -- timeout variables
-local maxIdleTime = 15
+local maxIdleTime = 20
 local timeIdleStart = 0
 local timeIdle = 0
 local countingIdleTime = false
@@ -74,7 +74,7 @@ function gameScreen:reset()
     p2:teleport(544, 208)
     p2.facing = -1
     
-    bgm:setVolume(1)
+    bgm:setVolume(fullVol)
     
     -- time out variables
     countingIdleTime = false
