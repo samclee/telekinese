@@ -1,13 +1,13 @@
 local Player = Class{ __includes = Entity }
 
-function Player:init(cx, cy, sheet, anims, color, walkSnd)
+function Player:init(cx, cy, sheet, anims, color, sndTag)
     -- visual
     self.id = 'player'
     self.sheet = sheet
     self.anims = anims
     self.curAnim = anims[1]
     self.color = color
-    self.walkSnd = walkSnd
+    self.sndTag = sndTag
     self.walkSndPlaying = false
     self.facing = 1
     self.inGoal = false
@@ -40,13 +40,13 @@ function Player:update(dt, dx, dy)
         
         self.curAnim = self.anims[2]
         if not self.walkSndPlaying then 
-            --[[play walk snd]]
+            TEsound.volume(self.sndTag, 1)
             self.walkSndPlaying = true
         end
     else
         self.curAnim = self.anims[1]
         if self.walkSndPlaying then 
-            --[[pause walk snd]]
+            TEsound.volume(self.sndTag, 0)
             self.walkSndPlaying = false
         end
     end
@@ -95,7 +95,7 @@ function Player:launchAll()
         table.remove(self.grabbedBalls, i)
     end
     
-    --[[play exp8]]
+    TEsound.play(exp8)
     screen:setShake(20)
     self.ringRadius = telekinesisRadius
 end
@@ -113,7 +113,7 @@ function Player:grabBalls(balls)
         end
     end
     
-    --[[play pow3]]
+    TEsound.play(pow3)
     
     if ballGrabbed then 
         self.ringRadius = smlTelekinesisRadius

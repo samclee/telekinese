@@ -7,6 +7,7 @@ le = love.event
 lm = love.math
 lj = love.joystick
 lt = love.timer
+ls = love.sound
 
 -- general libraries
 vec = require 'libs/vector'
@@ -46,27 +47,27 @@ canim = anim8.newAnimation(cg('1-2', 1), 0.2)
 require 'libs/tesound'
 
 ---- music
-fullVol = 0.2
-bgm = la.newSource('assets/audio/roccow.ogg', 'stream')
-bgm:setLooping(true)
-
-bgm:setVolume(fullVol)
+fullVol = 0.6
+bgmSnd = ls.newSoundData('assets/audio/roccow.ogg')
+TEsound.playLooping(bgmSnd, 'bgm')
+TEsound.volume('bgm', fullVol)
 
 
 ---- sfx
-exp3 = la.newSource('assets/audio/exp3.ogg', 'static')
-exp8 = la.newSource('assets/audio/exp8.ogg', 'static')
-pow3 = la.newSource('assets/audio/pow3.ogg', 'static')
-hit1 = la.newSource('assets/audio/hit1.ogg', 'static')
+exp3 = ls.newSoundData('assets/audio/exp3.ogg')
+exp8 = ls.newSoundData('assets/audio/exp8.ogg')
+pow3 = ls.newSoundData('assets/audio/pow3.ogg')
+hit1 = ls.newSoundData('assets/audio/hit1.ogg')
 
 ---- looping walk sounds
-step3 = la.newSource('assets/audio/stairs3.ogg', 'static')
-step3:setVolume(0.5)
-step3:setLooping(true)
+step1 = ls.newSoundData('assets/audio/stairs3.ogg')
+step2 = ls.newSoundData('assets/audio/stairs4.ogg')
 
-step4 = la.newSource('assets/audio/stairs4.ogg', 'static')
-step4:setVolume(0.5)
-step4:setLooping(true)
+TEsound.playLooping(step1, 'step1')
+TEsound.playLooping(step2, 'step2')
+
+TEsound.volume('step1', 0)
+TEsound.volume('step2', 0)
 
 -- game vars
 telekinesisRadius = 80
@@ -138,7 +139,7 @@ end
 function love.keypressed(k)
     if k == 'f' then
         push:switchFullscreen()
-    elseif k == 'q' or k == 'escape' then
+    elseif k == 'escape' then
         le.quit()
     end
 end
