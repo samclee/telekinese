@@ -56,7 +56,7 @@ local countingIdleTime = false
 
 function gameScreen:reset()
     screen:setShake(10)
-    exp3:play()
+    --[[play exp3]]
     scores[1], scores[2] = 0, 0
     gameEnd = false
     

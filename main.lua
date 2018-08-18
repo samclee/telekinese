@@ -43,19 +43,23 @@ cg = anim8.newGrid(192, 108, csheet:getWidth(), csheet:getHeight())
 canim = anim8.newAnimation(cg('1-2', 1), 0.2)
 
 -- audio
-require 'libs/slam'
-bgm = la.newSource('assets/audio/roccow.ogg', 'stream')
--- music: https://roccow.bandcamp.com
-bgm:setLooping(true)
-fullVol = 0.2
-bgm:setVolume(fullVol)
-bgm:play()
+require 'libs/tesound'
 
+---- music
+fullVol = 0.2
+bgm = la.newSource('assets/audio/roccow.ogg', 'stream')
+bgm:setLooping(true)
+
+bgm:setVolume(fullVol)
+
+
+---- sfx
 exp3 = la.newSource('assets/audio/exp3.ogg', 'static')
 exp8 = la.newSource('assets/audio/exp8.ogg', 'static')
 pow3 = la.newSource('assets/audio/pow3.ogg', 'static')
 hit1 = la.newSource('assets/audio/hit1.ogg', 'static')
 
+---- looping walk sounds
 step3 = la.newSource('assets/audio/stairs3.ogg', 'static')
 step3:setVolume(0.5)
 step3:setLooping(true)

@@ -40,13 +40,13 @@ function Player:update(dt, dx, dy)
         
         self.curAnim = self.anims[2]
         if not self.walkSndPlaying then 
-            self.walkSnd:play() 
+            --[[play walk snd]]
             self.walkSndPlaying = true
         end
     else
         self.curAnim = self.anims[1]
         if self.walkSndPlaying then 
-            self.walkSnd:pause()
+            --[[pause walk snd]]
             self.walkSndPlaying = false
         end
     end
@@ -95,7 +95,7 @@ function Player:launchAll()
         table.remove(self.grabbedBalls, i)
     end
     
-    exp8:play()
+    --[[play exp8]]
     screen:setShake(20)
     self.ringRadius = telekinesisRadius
 end
@@ -113,7 +113,7 @@ function Player:grabBalls(balls)
         end
     end
     
-    pow3:play()
+    --[[play pow3]]
     
     if ballGrabbed then 
         self.ringRadius = smlTelekinesisRadius
