@@ -37,15 +37,19 @@ local clText = {{
 }
 
 local clTextIndex = 1
-local switchColorTimer  = 0
+local colorSwitchStartTime  = 0
+local muteStartTime = 0 
+local muted = false
 
 function startScreen:enter()
     colorSwitchStartTime = lt.getTime()
-    bgm:setVolume(0.03)
+    muteStartTime = lt.getTime()
+    muted = false
+    TEsound.volume('bgm', fullVol)
 end
 
 function startScreen:update(dt)
-    Timer.update(dt)
+    TEsound.cleanup()
     canim:update(dt)
     p1input:update()
     p2input:update()
@@ -57,6 +61,11 @@ function startScreen:update(dt)
     if lt.getTime() - colorSwitchStartTime > 0.5 then
         clTextIndex =  (clTextIndex % 2) + 1
         colorSwitchStartTime = lt.getTime()
+    end
+    
+    if lt.getTime() - muteStartTime > 60 and muted == false then
+        TEsound.volume('bgm', 0)
+        muted = true
     end
 end
 

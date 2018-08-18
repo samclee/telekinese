@@ -34,18 +34,16 @@ local balls = {
                 Ball(0, 0, assets.sprites.ball),
                 Ball(0, 0, assets.sprites.ball),
                 Ball(0, 0, assets.sprites.ball),
-                Ball(0, 0, assets.sprites.ball),
                 }
 local ballLocs = {
-                   {340-24, 160-24},
-                   {460-24, 160-24},
-                   {340-24, 290-24},
-                   {460-24, 290-24},
+                   {400-24, 225-24},
+                   {400-24, 125-24},
+                   {400-24, 325-24},
                    }
 
-local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, step3)
-local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, step4)
-local maxScore = 7
+local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, 'step1')
+local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, 'step2')
+local maxScore = 5
 local gameEnd = false
 
 -- timeout variables
@@ -56,7 +54,8 @@ local countingIdleTime = false
 
 function gameScreen:reset()
     screen:setShake(10)
-    exp3:play()
+    TEsound.play(exp3)
+    TEsound.volume('bgm', fullVol)
     scores[1], scores[2] = 0, 0
     gameEnd = false
     
@@ -73,7 +72,7 @@ function gameScreen:reset()
     p2:teleport(544, 208)
     p2.facing = -1
     
-    bgm:setVolume(fullVol)
+    
     
     -- time out variables
     countingIdleTime = false
@@ -84,10 +83,12 @@ end
 function gameScreen:enter()
     lg.setFont(fontBig)
     self:reset()
+    
 end
 
 function gameScreen:update(dt)
     Timer.update(dt)
+    TEsound.cleanup()
     
     local anyInputPressed = false
     if scores[1] >= maxScore or scores[2] >= maxScore then
