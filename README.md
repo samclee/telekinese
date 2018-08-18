@@ -4,7 +4,7 @@ A two-player game of telekinetic soccer! Use a single button to levitate and hur
 
 ## Controls
 ### Keyboard
-Movement - WASD / arrow keys
+Movement - WASD / IJK:
 
 Action - space / return
 
