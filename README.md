@@ -24,4 +24,4 @@ Fullscreen - f
 
 Quit - q or escape
 
-Music: https://roccow.bandcamp.com/track/swingjeding
+Music: https://roccow.bandcamp.com
