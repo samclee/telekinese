@@ -53,7 +53,6 @@ bgmSnd = ls.newSoundData('assets/audio/roccow.ogg')
 TEsound.playLooping(bgmSnd, 'bgm')
 TEsound.volume('bgm', fullVol)
 
-
 ---- sfx
 exp3 = ls.newSoundData('assets/audio/exp3.ogg')
 exp8 = ls.newSoundData('assets/audio/exp8.ogg')
@@ -110,7 +109,6 @@ p2input = baton.new{
     joystick = love.joystick.getJoysticks()[2]
 }
 
-
 -- classes
 Class = require 'libs/class'
 Entity = require 'classes/Entity'
@@ -123,8 +121,6 @@ Goal = require 'classes/Goal'
 gamestate = require 'libs/gamestate'
 startScreen = require 'states.startScreen'
 gameScreen = require 'states.gameScreen'
-
-
 
 function love.load()
     lw.setTitle('Telekinessball')

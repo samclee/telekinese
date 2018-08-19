@@ -208,7 +208,7 @@ function gameScreen:draw()
     else
         -- trophy
         local winX, winY = p1.pos.x, p1.pos.y
-        if scores[2] >= 10 then
+        if scores[2] >= maxScore then
             winX, winY = p2.pos.x, p2.pos.y
         end
         

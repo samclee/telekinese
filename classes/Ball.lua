@@ -96,4 +96,9 @@ function Ball:enterFromSide()
     self.velVec = vec.fromPolar(math.rad(newAngle)) * ejectStr
 end
 
+function Ball:teleport(x, y)
+    world:update(self, x, y)
+    self.pos.x, self.pos.y = x, y
+end
+
 return Ball
