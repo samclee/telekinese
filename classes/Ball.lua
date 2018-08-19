@@ -8,6 +8,8 @@ function Ball:init(cx, cy, sprite)
     self.auraColor = colors.white
     self.auraRad = 35
     self.opacity = 0.6
+    
+    self.startPos = {x = cx - sprite:getWidth() / 2, y = cy - sprite:getHeight() / 2}
 
     Entity.init(self, cx - sprite:getWidth() / 2, cy - sprite:getHeight() / 2, sprite:getWidth(), sprite:getHeight())
 

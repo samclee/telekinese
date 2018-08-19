@@ -125,7 +125,7 @@ gameScreen = require 'states.gameScreen'
 function love.load()
     lw.setTitle('Telekinessball')
 
-    push:switchFullscreen()
+    --push:switchFullscreen()
     
     love.graphics.setLineWidth( 3 )
     

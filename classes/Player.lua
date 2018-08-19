@@ -113,7 +113,8 @@ function Player:grabBalls(balls)
         end
     end
     
-    TEsound.play(pow3)
+    TEsound.play(pow3, 'pow3')
+    TEsound.volume('pow3', 0.5)
     
     if ballGrabbed then 
         self.ringRadius = smlTelekinesisRadius

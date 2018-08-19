@@ -31,9 +31,9 @@ local goals = {
 local scores = {0, 0}
 
 local balls = {
-                Ball(0, 0, assets.sprites.ball),
-                Ball(0, 0, assets.sprites.ball),
-                Ball(0, 0, assets.sprites.ball),
+                Ball(400-24, 225-24, assets.sprites.ball),
+                Ball(400-24, 125-24, assets.sprites.ball),
+                Ball(400-24, 325-24, assets.sprites.ball),
                 }
 local ballLocs = {
                    {400-24, 225-24},
@@ -71,8 +71,6 @@ function gameScreen:reset()
     
     p2:teleport(544, 208)
     p2.facing = -1
-    
-    
     
     -- time out variables
     countingIdleTime = false
@@ -168,6 +166,9 @@ function gameScreen:update(dt)
     -- update balls
     for i,ball in ipairs(balls) do
         ball:update(dt, p1, p2)
+        if ball.pos.x < -ball.w or ball.pos.x > gameW or ball.pos.y < -ball.h or ball.pos.y > gameH then
+            ball:teleport(ball.startPos.x + ball.w / 2, ball.startPos.y + ball.h / 2)
+        end
     end
     
     -- update goals
