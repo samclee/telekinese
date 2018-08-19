@@ -96,7 +96,7 @@ function gameScreen:update(dt)
     end
     
     if gameEnd then 
-        canim:update(dt) 
+        rcanim:update(dt) 
     end
     
     local dx, dy = 0, 0
@@ -115,14 +115,10 @@ function gameScreen:update(dt)
     -- keypresses
     if p1input:pressed('action') then
         anyInputPressed = true
-        if gameEnd then
-            self:reset()
-        else
-            p1:action(balls)
-        end
+        p1:action(balls)
     end
     
-    if p1input:pressed('reset') then
+    if p1input:pressed('reset') and gameEnd then
         anyInputPressed = true
         self:reset()
     end
@@ -146,16 +142,16 @@ function gameScreen:update(dt)
     -- keypresses
     if p2input:pressed('action') then
         anyInputPressed = true
-        if gameEnd then
-            self:reset()
-        else
-            p2:action(balls)
-        end
+        p2:action(balls)
     end
     
-    if p2input:pressed('reset') then
+    if p2input:pressed('reset') and gameEnd then
         anyInputPressed = true
         self:reset()
+    end
+    
+    if p2.pos.x < -p2.w or p2.pos.x > gameW or p2.pos.y < -p2.h or p2.pos.y > gameH then
+        p2:teleport(544, 208)
     end
     
     if not anyInputPressed then
@@ -167,10 +163,6 @@ function gameScreen:update(dt)
         end
     else
         countingIdleTime = false
-    end
-    
-    if p2.pos.x < -p2.w or p2.pos.x > gameW or p2.pos.y < -p2.h or p2.pos.y > gameH then
-        p2:teleport(544, 208)
     end
     
     -- update balls
@@ -224,8 +216,8 @@ function gameScreen:draw()
         lg.draw(trophy, winX - 8, winY - 55)
         
         -- button animation
-        canim:draw(csheet, 400 - 96 - 290, 320)
-        canim:draw(csheet, 400 - 96 + 290, 320)
+        rcanim:draw(csheet, 400 - 96 - 290, 320)
+        rcanim:draw(csheet, 400 - 96 + 290, 320)
         
         -- game over
         lg.setColor(colors.black)

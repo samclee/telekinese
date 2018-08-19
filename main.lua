@@ -42,6 +42,7 @@ fontTitle = assets.fonts.FFFFORWA(64)
 csheet = assets.sprites.controllersheet
 cg = anim8.newGrid(192, 108, csheet:getWidth(), csheet:getHeight())
 canim = anim8.newAnimation(cg('1-2', 1), 0.2)
+rcanim = anim8.newAnimation(cg(1,1, 3,1), 0.2)
 
 -- audio
 require 'libs/tesound'
@@ -86,7 +87,7 @@ p1input = baton.new{
         up = {'key:w', 'axis:lefty-', 'button:dpup'},
         down = {'key:s', 'axis:lefty+', 'button:dpdown'},
         action = {'key:space', 'button:a'},
-        reset = {'key:r', 'button:start'}
+        reset = {'key:r', 'button:b'}
     },
     pairs = {
         move = {'left', 'right', 'up', 'down'}
@@ -101,7 +102,7 @@ p2input = baton.new{
         up = {'key:i', 'axis:lefty-', 'button:dpup'},
         down = {'key:k', 'axis:lefty+', 'button:dpdown'},
         action = {'key:return', 'button:a'},
-        reset = {'key:r', 'button:start'}
+        reset = {'key:r', 'button:b'}
     },
     pairs = {
         move = {'left', 'right', 'up', 'down'}
