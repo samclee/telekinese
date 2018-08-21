@@ -17,7 +17,7 @@ function Ball:init(cx, cy, sprite)
    world:add(self, self:getRect())
 
    self.filter = function(item, other)
-        if other.id == 'goal' then
+        if other.id == 'goal' or other.id == 'goalbox' then
             return 'cross'
         end
         

@@ -28,6 +28,11 @@ local goals = {
                 Goal(793, 225, 14, 128, 1, colors.orange),
 }
 
+local goalboxes = {
+                Goalbox(7, 5 * 32, 57, 128),
+                Goalbox(gameW - 64, 5 * 32, 57, 128)
+}
+
 local scores = {0, 0}
 
 local balls = {

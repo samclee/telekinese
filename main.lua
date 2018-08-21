@@ -109,7 +109,6 @@ p2input = baton.new{
     joystick = love.joystick.getJoysticks()[2]
 }
 
-
 -- classes
 Class = require 'libs/class'
 Entity = require 'classes/Entity'
@@ -117,13 +116,12 @@ Player = require 'classes/Player'
 Ball = require 'classes/Ball'
 Wall = require 'classes/Wall'
 Goal = require 'classes/Goal'
+Goalbox = require 'classes/Goalbox'
 
 -- states
 gamestate = require 'libs/gamestate'
 startScreen = require 'states.startScreen'
 gameScreen = require 'states.gameScreen'
-
-
 
 function love.load()
     lw.setTitle('Telekinessball')
