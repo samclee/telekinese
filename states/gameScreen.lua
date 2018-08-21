@@ -29,8 +29,8 @@ local goals = {
 }
 
 local goalboxes = {
-                Goalbox(7, 5 * 32, 57, 128),
-                Goalbox(gameW - 64, 5 * 32, 57, 128)
+                Goalbox(16, 5 * 32, 48, 128),
+                Goalbox(gameW - 64, 5 * 32, 48, 128)
 }
 
 local scores = {0, 0}
