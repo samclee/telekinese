@@ -81,12 +81,12 @@ baton = require 'libs/baton'
 
 p1input = baton.new{
     controls = {
-        left = {'key:a', 'axis:leftx-', 'button:dpleft'},
-        right = {'key:d', 'axis:leftx+', 'button:dpright'},
-        up = {'key:w', 'axis:lefty-', 'button:dpup'},
-        down = {'key:s', 'axis:lefty+', 'button:dpdown'},
-        action = {'key:space', 'button:a'},
-        reset = {'key:r', 'button:b'}
+        left = {'key:a', 'axis:1-', 'button:dpleft'},
+        right = {'key:d', 'axis:1+', 'button:dpright'},
+        up = {'key:w', 'axis:2-', 'button:dpup'},
+        down = {'key:s', 'axis:2+', 'button:dpdown'},
+        action = {'key:space', 'button:1'},
+        reset = {'key:r', 'button:2'}
     },
     pairs = {
         move = {'left', 'right', 'up', 'down'}
@@ -96,18 +96,19 @@ p1input = baton.new{
 
 p2input = baton.new{
     controls = {
-        left = {'key:j', 'axis:leftx-', 'button:dpleft'},
-        right = {'key:l', 'axis:leftx+', 'button:dpright'},
-        up = {'key:i', 'axis:lefty-', 'button:dpup'},
-        down = {'key:k', 'axis:lefty+', 'button:dpdown'},
-        action = {'key:return', 'button:a'},
-        reset = {'key:r', 'button:b'}
+        left = {'key:j', 'axis:1-', 'button:dpleft'},
+        right = {'key:l', 'axis:1+', 'button:dpright'},
+        up = {'key:i', 'axis:2-', 'button:dpup'},
+        down = {'key:k', 'axis:2+', 'button:dpdown'},
+        action = {'key:return', 'button:1'},
+        reset = {'key:r', 'button:2'}
     },
     pairs = {
         move = {'left', 'right', 'up', 'down'}
     },
     joystick = love.joystick.getJoysticks()[2]
 }
+
 
 -- classes
 Class = require 'libs/class'
@@ -122,10 +123,12 @@ gamestate = require 'libs/gamestate'
 startScreen = require 'states.startScreen'
 gameScreen = require 'states.gameScreen'
 
+
+
 function love.load()
     lw.setTitle('Telekinessball')
 
-    --push:switchFullscreen()
+    push:switchFullscreen()
     
     love.graphics.setLineWidth( 3 )
     

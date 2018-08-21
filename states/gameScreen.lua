@@ -72,6 +72,8 @@ function gameScreen:reset()
     p2:teleport(544, 208)
     p2.facing = -1
     
+    
+    
     -- time out variables
     countingIdleTime = false
     timeIdleStart = 0
@@ -209,7 +211,7 @@ function gameScreen:draw()
     else
         -- trophy
         local winX, winY = p1.pos.x, p1.pos.y
-        if scores[2] >= maxScore then
+        if scores[2] > scores[1] then
             winX, winY = p2.pos.x, p2.pos.y
         end
         

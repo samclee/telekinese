@@ -56,14 +56,14 @@ end
 function sourceFunction.joystick.axis(joystick, value)
 	local axis, direction = parseAxis(value)
 	value = tonumber(axis) and joystick:getAxis(tonumber(axis))
-	                        or joystick:getGamepadAxis(axis)
+	                        -- or joystick:getGamepadAxis(axis)
 	if direction == '-' then value = -value end
 	return value > 0 and value or 0
 end
 
 function sourceFunction.joystick.button(joystick, button)
 	local isDown = tonumber(button) and joystick:isDown(tonumber(button))
-									 or joystick:isGamepadDown(button)
+									--  or joystick:isGamepadDown(button)
 	return isDown and 1 or 0
 end
 
