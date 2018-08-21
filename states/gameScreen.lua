@@ -77,8 +77,6 @@ function gameScreen:reset()
     p2:teleport(544, 208)
     p2.facing = -1
     
-    
-    
     -- time out variables
     countingIdleTime = false
     timeIdleStart = 0
@@ -181,6 +179,10 @@ function gameScreen:update(dt)
     -- update goals
     for i,goal in ipairs(goals) do
         goal:update(dt, scores)
+    end
+    
+    for i,goalbox in ipairs(goalboxes) do
+        goalbox:update(dt)
     end
 end
 
