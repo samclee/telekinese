@@ -72,10 +72,17 @@ function Player:update(dt, dx, dy)
     
     -- if isGrabbing, attempt to move all grabbed balls with you
     for i,ball in ipairs(self.grabbedBalls) do
-        if (self:getCenter() - ball:getCenter()):len() < telekinesisRadius then
+        if (self:getCenter() - ball:getCenter()):len() < telekinesisRadius then -- in radius
             ball.velVec = vec(dx * self.spd, dy * self.spd)
-        else
-            ball.velVec = (self:getCenter() - ball:getCenter()):normalized() * 12
+        else -- out of radius
+            --ball.velVec = (self:getCenter() - ball:getCenter()):normalized() * 12
+            ball.status = 0
+            ball.auraColor = colors.white
+            ball.opacity = 0.6
+            table.remove(self.grabbedBalls, i)
+            if #self.grabbedBalls == 0 then
+                self.ringRadius = telekinesisRadius
+            end
         end
     end
     
