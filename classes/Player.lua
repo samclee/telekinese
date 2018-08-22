@@ -75,7 +75,10 @@ function Player:update(dt, dx, dy)
         if (self:getCenter() - ball:getCenter()):len() < telekinesisRadius then -- in radius
             ball.velVec = vec(dx * self.spd, dy * self.spd)
         else -- out of radius
+            -- chase
             --ball.velVec = (self:getCenter() - ball:getCenter()):normalized() * 12
+            
+            -- let go
             ball.status = 0
             ball.auraColor = colors.white
             ball.opacity = 0.6
