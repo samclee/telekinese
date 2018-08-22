@@ -37,13 +37,13 @@ local scores = {0, 0}
 
 local balls = {
                 Ball(400-24, 225-24, assets.sprites.ball),
-                Ball(400-24, 125-24, assets.sprites.ball),
-                Ball(400-24, 325-24, assets.sprites.ball),
+                --Ball(400-24, 125-24, assets.sprites.ball),
+                --Ball(400-24, 325-24, assets.sprites.ball),
                 }
 local ballLocs = {
                    {400-24, 225-24},
-                   {400-24, 125-24},
-                   {400-24, 325-24},
+                   --{400-24, 125-24},
+                   --{400-24, 325-24},
                    }
 
 local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, 'step1')
@@ -52,7 +52,7 @@ local maxScore = 5
 local gameEnd = false
 
 -- timeout variables
-local maxIdleTime = 20
+local maxIdleTime = 12
 local timeIdleStart = 0
 local timeIdle = 0
 local countingIdleTime = false
