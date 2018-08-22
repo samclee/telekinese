@@ -116,7 +116,7 @@ function gameScreen:update(dt)
     if (ix > 0) then dx = dx + 1 end
     p1:update(dt, dx, dy)
     -- keypresses
-    if p1input:pressed('action') then
+    if not gameEnd and p1input:pressed('action') then
         anyInputPressed = true
         p1:action(balls)
     end
@@ -143,7 +143,7 @@ function gameScreen:update(dt)
     if (ix > 0) then dx = dx + 1 end
     p2:update(dt, dx, dy)
     -- keypresses
-    if p2input:pressed('action') then
+    if not gameEnd and p2input:pressed('action') then
         anyInputPressed = true
         p2:action(balls)
     end
