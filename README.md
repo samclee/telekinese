@@ -17,7 +17,7 @@ Movement - left stick or d-pad
 
 Action - A
 
-Reset - start
+Reset - B
 
 ### Assorted controls
 
