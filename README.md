@@ -4,11 +4,13 @@ A two-player game of telekinetic soccer! Use a single button to levitate and hur
 
 ## Controls
 ### Keyboard
-Movement - WASD / IJK:
+Movement - WASD / IJKL
 
 Action - space / return
 
-Reset - start
+Reset - r
+
+Fullscreen - f
 
 ### Controller
 Movement - left stick or d-pad
@@ -18,10 +20,8 @@ Action - A
 Reset - start
 
 ### Assorted controls
-Reset - r
 
-Fullscreen - f
 
-Quit - q or escape
+Quit - escape
 
 Music: https://roccow.bandcamp.com
