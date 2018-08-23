@@ -50,6 +50,7 @@ local p1 = Player(0, 0, spritesheet, plAnims, 1, colors.aqua, 'step1')
 local p2 = Player(0, 0, spritesheet, plAnims, 2, colors.orange, 'step2')
 local maxScore = 5
 local gameEnd = false
+local winner = 1
 
 -- timeout variables
 local maxIdleTime = 12
@@ -94,8 +95,10 @@ function gameScreen:update(dt)
     TEsound.cleanup()
     
     local anyInputPressed = false
-    if scores[1] >= maxScore or scores[2] >= maxScore then
+    if not gameEnd and (scores[1] >= maxScore or scores[2] >= maxScore) then
         gameEnd = true
+        if scores[1] >= maxScore then winner = 1 
+        else winner = 2 end
     end
     
     if gameEnd then 
@@ -217,7 +220,7 @@ function gameScreen:draw()
     else -- draw trophy, controllerts, game over
         -- trophy
         local winX, winY = p1.pos.x, p1.pos.y
-        if scores[2] > scores[1] then
+        if winner == 2 then
             winX, winY = p2.pos.x, p2.pos.y
         end
         
