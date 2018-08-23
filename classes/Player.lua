@@ -1,11 +1,12 @@
 local Player = Class{ __includes = Entity }
 
-function Player:init(cx, cy, sheet, anims, color, sndTag)
+function Player:init(cx, cy, sheet, anims, num, color, sndTag)
     -- visual
     self.id = 'player'
     self.sheet = sheet
     self.anims = anims
     self.curAnim = anims[1]
+    self.num = num
     self.color = color
     self.sndTag = sndTag
     self.walkSndPlaying = false
@@ -24,7 +25,7 @@ function Player:init(cx, cy, sheet, anims, color, sndTag)
     -- collision
     world:add(self, self:getRect()) 
     self.filter = function(item, other)
-        if (other.id == 'player') then
+        if other.id == 'goalbox' and other.num == self.num then
             return 'cross'
         end
         

@@ -29,25 +29,25 @@ local goals = {
 }
 
 local goalboxes = {
-                Goalbox(16, 5 * 32, 48, 128),
-                Goalbox(gameW - 64, 5 * 32, 48, 128)
+                Goalbox(16,                 3 * 32,     4 * 32 - 16, 8 * 32,   1),
+                Goalbox(gameW - 4 * 32,     3 * 32,     4 * 32 - 16, 8 * 32,   2)
 }
 
 local scores = {0, 0}
 
 local balls = {
                 Ball(400-24, 225-24, assets.sprites.ball),
-                --Ball(400-24, 125-24, assets.sprites.ball),
-                --Ball(400-24, 325-24, assets.sprites.ball),
+                Ball(400-24, 125-24, assets.sprites.ball),
+                Ball(400-24, 325-24, assets.sprites.ball),
                 }
 local ballLocs = {
                    {400-24, 225-24},
-                   --{400-24, 125-24},
-                   --{400-24, 325-24},
+                   {400-24, 125-24},
+                   {400-24, 325-24},
                    }
 
-local p1 = Player(0, 0, spritesheet, plAnims, colors.aqua, 'step1')
-local p2 = Player(0, 0, spritesheet, plAnims, colors.orange, 'step2')
+local p1 = Player(0, 0, spritesheet, plAnims, 1, colors.aqua, 'step1')
+local p2 = Player(0, 0, spritesheet, plAnims, 2, colors.orange, 'step2')
 local maxScore = 5
 local gameEnd = false
 
@@ -116,7 +116,7 @@ function gameScreen:update(dt)
     if (ix > 0) then dx = dx + 1 end
     p1:update(dt, dx, dy)
     -- keypresses
-    if not gameEnd and p1input:pressed('action') then
+    if p1input:pressed('action') then
         anyInputPressed = true
         p1:action(balls)
     end
@@ -143,7 +143,7 @@ function gameScreen:update(dt)
     if (ix > 0) then dx = dx + 1 end
     p2:update(dt, dx, dy)
     -- keypresses
-    if not gameEnd and p2input:pressed('action') then
+    if p2input:pressed('action') then
         anyInputPressed = true
         p2:action(balls)
     end
@@ -209,13 +209,12 @@ function gameScreen:draw()
     p2:draw()
     
     -- draw scores
-    if not gameEnd then
+    if not gameEnd then -- draw scores
         lg.setColor(colors.aqua)
         lg.printf(scores[1] .. '/' .. maxScore, 20, 20, gameW, 'left')
         lg.setColor(colors.orange)
         lg.printf(scores[2] .. '/' .. maxScore, -20, 20, gameW, 'right')
-    -- game over stuff
-    else
+    else -- draw trophy, controllerts, game over
         -- trophy
         local winX, winY = p1.pos.x, p1.pos.y
         if scores[2] > scores[1] then
