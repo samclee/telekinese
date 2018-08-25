@@ -12,6 +12,8 @@ Reset - r
 
 Fullscreen - f
 
+Quit - escape
+
 ### Controller
 Movement - left stick or d-pad
 
@@ -19,9 +21,5 @@ Action - A
 
 Reset - B
 
-### Assorted controls
-
-
-Quit - escape
 
 Music: https://roccow.bandcamp.com
